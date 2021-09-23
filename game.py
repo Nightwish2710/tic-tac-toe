@@ -1,11 +1,31 @@
 
 class TicTacToe:
     def __init__(self, size=3):
-        self.size = size
-        self.board = [" "] * (self.size ** 2)
-        self.padwidth = len(str(self.size ** 2))
+        self.__size = size
+        self.__board = [" "] * (self.size ** 2)
+        self.__padwidth = len(str(self.size ** 2))
 
-        self.cur_winner = None
+        self.__cur_winner = None
+
+    @property
+    def size(self):
+        return self.__size
+    
+    @property
+    def board(self):
+        return self.__board
+
+    @property
+    def padwidth(self):
+        return self.__padwidth
+
+    @property
+    def cur_winner(self):
+        return self.__cur_winner
+
+    @cur_winner.setter
+    def cur_winner(self, cur_winner):
+        self.__cur_winner = cur_winner
 
     def print_board(self):
         for row in [self.board[i*self.size:(i+1)*self.size] for i in range(self.size)]:
@@ -16,12 +36,6 @@ class TicTacToe:
                         for j in range(self.size)]
         for row in number_board:
             print("| " + " | ".join(row) + " |")
-
-    def get_cur_winner(self):
-        return self.cur_winner
-
-    def set_cur_winner(self, cur_winner):
-        self.cur_winner = cur_winner
 
     def get_available_moves(self):
         return [i for i, spot in enumerate(self.board) if spot == " "]

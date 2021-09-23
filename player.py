@@ -3,7 +3,11 @@ import math
 
 class Player:
     def __init__(self, letter):
-        self.letter = letter # letter is x or o
+        self.__letter = letter # letter is x or o
+
+    @property
+    def letter(self):
+        return self.__letter
 
     # get next move in the game
     def get_next_move(self, game):
@@ -53,7 +57,7 @@ class GeniusComputerPlayer(Player):
         other_player = "O" if cur_player == "X" else "X"
 
         # base case
-        if state.get_cur_winner() == other_player:
+        if state.cur_winner == other_player:
             intercept = 1 if other_player == myself else -1            
             return { "position": None, "score": intercept * (state.get_num_empty_squares() + 1) }
         # if no empty square
@@ -73,7 +77,7 @@ class GeniusComputerPlayer(Player):
             
             # step 3: undo the move
             state.board[possible_move] = " "
-            state.set_cur_winner(None)
+            state.cur_winner = None
             sim_score["position"] = possible_move
             
             # step 4: update the dict if necessary

@@ -22,7 +22,7 @@ def play(game, x_player, o_player, is_print_game=True):
                 print("="*30)
 
             #### WIN ####
-            if game.get_cur_winner():
+            if game.cur_winner:
                 if is_print_game:
                     print(f"{cur_letter} wins!")
                 return cur_letter
